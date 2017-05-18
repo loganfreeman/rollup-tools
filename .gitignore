@@ -26,3 +26,5 @@ tmp/
 lastEventId.txt
 
 /*.csv
+
+/*.json

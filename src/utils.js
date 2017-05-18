@@ -8,7 +8,36 @@ import * as winston from 'winston';
 
 import stringify from 'json-stringify-safe';
 
+import Q from 'q';
+
 const logLevel = ['error', 'warn', 'info', 'verbose', 'debug', 'silly'];
+
+
+export function readFirstLine (path) {
+  return Q.promise(function (resolve, reject) {
+    var rs = fs.createReadStream(path, {encoding: 'utf8'});
+    var acc = '';
+    var pos = 0;
+    var index;
+    rs
+      .on('data', function (chunk) {
+        index = chunk.indexOf('\n');
+        acc += chunk;
+        index !== -1 ? rs.close() : pos += chunk.length;
+      })
+      .on('close', function () {
+        resolve(acc.slice(0, pos + index));
+      })
+      .on('error', function (err) {
+        reject(err);
+      })
+  });
+}
+
+export function loadJson(file) {
+  let input = fs.readFileSync(file, 'UTF-8');
+  return JSON.parse(input);
+}
 
 export function contains(array, needle) {
   if(typeof needle == 'function') {
