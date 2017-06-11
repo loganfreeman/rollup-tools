@@ -8,13 +8,29 @@ import * as winston from 'winston';
 
 import stringify from 'json-stringify-safe';
 
-import Q from 'q';
+import Promise from 'bluebird';
+
+import colors from 'colors';
 
 const logLevel = ['error', 'warn', 'info', 'verbose', 'debug', 'silly'];
 
+colors.setTheme({
+  silly: 'rainbow',
+  input: 'grey',
+  verbose: 'cyan',
+  prompt: 'grey',
+  info: 'green',
+  data: 'grey',
+  help: 'cyan',
+  warn: 'yellow',
+  debug: 'blue',
+  error: 'red'
+});
+
+
 
 export function readFirstLine (path) {
-  return Q.promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var rs = fs.createReadStream(path, {encoding: 'utf8'});
     var acc = '';
     var pos = 0;
@@ -148,7 +164,8 @@ export function formatBirthDate(jsonDate) {
 
 
 export function log(message, level = 'info') {
-  logger.log(level, message);
+
+  logger.log(level, message[level]);
 }
 
 export function calendar(time) {

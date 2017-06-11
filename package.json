@@ -30,7 +30,6 @@
     "source-map-support": "^0.4.13"
   },
   "dependencies": {
-    "Q": "^0.0.1",
     "axios": "^0.16.0",
     "axios-retry": "^1.2.0",
     "bluebird": "^3.5.0",

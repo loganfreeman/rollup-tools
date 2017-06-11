@@ -49,6 +49,7 @@ export function getMongoUrl(database) {
 export function connect(database, callback) {
   let url = getMongoUrl(database);
   mongoose.connect(url)
+  log(`connecting ${url}`, 'warn');
   mongoose.connection.on('open', () => {
       mongoose.Promise = Promise;
       log(`mongoose connected: ${url}`)
