@@ -29,6 +29,7 @@ function getWaterBody(text) {
     var result = eval(findAndClean);
 
     result.forEach((waterbody) => {
+      waterbody.url = `https://wildlife.utah.gov/hotspots/detailed.php?id=${waterbody[3]}`
       console.log(waterbody)
     })
   }
