@@ -18,8 +18,9 @@ function login(browser) {
    return browser.click('a#userid')
    .setValue('input[name="id"]', process.env.username)
    .setValue('input[name="passwd"]', process.env.password)
-   .click('input[name="login"]');
-    
+   .click('input[name="login"]')
+   .click(`a[href="${process.env.board}"]`);
+
 
 
 }
