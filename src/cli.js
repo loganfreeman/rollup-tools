@@ -9,6 +9,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const POST_IMAGE_SRC = "/mitbbs_images/unknownspace-yellow/postnew.gif";
+
+
+const LOGOUT_URL = "/newindex/mitbbs_bbslogout.php?index_flag=1";
+
 function exit() {
   process.exit(0);
 }
@@ -19,7 +24,13 @@ function login(browser) {
    .setValue('input[name="id"]', process.env.username)
    .setValue('input[name="passwd"]', process.env.password)
    .click('input[name="login"]')
-   .click(`a[href="${process.env.board}"]`);
+   .click(`a[href="${process.env.board}"]`)
+   .click(`img[src="${POST_IMAGE_SRC}"]`)
+   .setValue('input[name="title"]', process.env.title)
+   .setValue('textarea[name="text"]', process.env.post)
+   .click('input[type="submit"]')
+   .pause(3000)
+   .click(`a[href="${LOGOUT_URL}"]`)
 
 
 
