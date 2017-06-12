@@ -16,17 +16,27 @@ const LOGOUT_URL = "/newindex/mitbbs_bbslogout.php?index_flag=1";
 
 const PHP_BIANCHENG_URL = "http://www.jb51.net/list/list_15_1.htm";
 
+const BCCN_URL = "https://www.bccn.net/news";
+
+const BCCN_HOME_URL = "https://www.bccn.net";
+
 function exit() {
   process.exit(0);
 }
 
 function login(browser, news) {
 
-  let text = `${news.title}
+  let text;
 
-  Link: ${news.url}
+  if(news.summary) {
+    text = news.summary;
+  }else{
+    text = `${news.title}
 
-  `;
+    Link: ${news.url}
+
+    `;
+  }
 
   return browser
   .click('a#userid')
@@ -93,17 +103,44 @@ function postToMitbss(news) {
   client.init().url('http://www.mitbbs.com/').then(() => {
     return login(client, news);
   }).then(() => {
-    //client.end();
+    client.end();
   })
 
   client.on('end', () => {
-    //exit();
+    exit();
   })
 }
 
 function doSomething(browser) {
   browser.setValue('#search_form_input_homepage', 'WebdriverIO').click('#search_button_homepage').getTitle().then(function(title) {
     console.log('Title is: ' + title);
+  })
+}
+
+function getBCCNNews(callback) {
+  request(BCCN_URL, (error, response, html) => {
+    if (!error && response.statusCode == 200) {
+      let $ = cheerio.load(html);
+
+      let newsList = [];
+
+      $('div.newlist').each((i, element) => {
+        let summary = $(element).children('.summary').text();
+        let title = $(element).children('.title').children('a').text();
+        let url = $(element).children('.title').children('a').attr('href');
+        let metadata = {
+          summary: summary,
+          title: title,
+          url: `${BCCN_HOME_URL}${url}`
+        }
+
+        console.log(metadata);
+
+        newsList.push(metadata);
+      });
+
+      callback(newsList);
+    }
   })
 }
 
@@ -114,7 +151,9 @@ function run(err) {
   function callback(newsList) {
     postToMitbss(getRandomItem(newsList))
   }
-  getHackerNews();
+  //getHackerNews(callback);
+  //
+  getBCCNNews(callback);
 }
 
 function start() {
