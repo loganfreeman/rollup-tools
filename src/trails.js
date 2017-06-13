@@ -24,7 +24,7 @@ function parseHtml(html) {
   $('.trail-result-card').each((index, element) => {
     let image = $(element).children('link[itemprop="image"]').attr('href');
     let url = $(element).children('a[itemprop="url"]').attr('href');
-    let title = $(element).children('div[itemprop="name"]').text();
+    let title = $('div[itemprop="name"]', '.item-info', element).text();
 
     let difficulty = $('.difficulty-info', '.item-info', element).children('.diff').text();
 
