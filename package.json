@@ -10,7 +10,8 @@
   "bin": {
     "my-tool": "dist/lib.cjs.js",
     "fishing": "dist/fishing.cjs.js",
-    "trails": "dist/trails.cjs.js"
+    "trails": "dist/trails.cjs.js",
+    "weather": "dist/weather.cjs.js"
   },
   "scripts": {
     "build": "./build.sh",
