@@ -27,8 +27,6 @@ colors.setTheme({
   error: 'red'
 });
 
-
-
 export function readFirstLine (path) {
   return new Promise(function (resolve, reject) {
     var rs = fs.createReadStream(path, {encoding: 'utf8'});
