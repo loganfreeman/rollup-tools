@@ -58,6 +58,14 @@ function produce(all_names, cps1, cps2) {
   let column = CPS2_COLUMNS[i];
   let sorted = sortNameByColumn(all_names, column);
   let results = run(sorted, cps1, cps2, i);
+  while(results.length < 3) {
+    i = i + 1;
+    if(i == CPS2_COLUMNS.length - 1) {
+      break;
+    }
+    let temp_results = run(sorted, cps1, cps2, i);
+    results = results.concat(temp_results);
+  }
   return results;
 }
 
