@@ -13,7 +13,8 @@
     "trails": "dist/trails.cjs.js",
     "weather": "dist/weather.cjs.js",
     "geo": "dist/geo.cjs.js",
-    "reddit": "dist/reddit.cjs.js"
+    "reddit": "dist/reddit.cjs.js",
+    "pinyin": "dist/pinyin.cjs.js"
   },
   "scripts": {
     "build": "./build.sh",
