@@ -14,7 +14,8 @@
     "weather": "dist/weather.cjs.js",
     "geo": "dist/geo.cjs.js",
     "reddit": "dist/reddit.cjs.js",
-    "pinyin": "dist/pinyin.cjs.js"
+    "pinyin": "dist/pinyin.cjs.js",
+    "axios": "dist/axios.cjs.js"
   },
   "scripts": {
     "build": "./build.sh",
@@ -38,7 +39,7 @@
     "source-map-support": "^0.4.13"
   },
   "dependencies": {
-    "axios": "^0.16.0",
+    "axios": "^0.16.2",
     "axios-retry": "^1.2.0",
     "bluebird": "^3.5.0",
     "cheerio": "^1.0.0-rc.1",
