@@ -36,7 +36,7 @@ let forecast = new Forecast({
 function getForecast(lat, long) {
   forecast.get([lat, long], function(err, weather) {
   if(err) return console.dir(err);
-  console.dir(weather);
+  console.log(JSON.stringify(weather));
 });
 }
 
